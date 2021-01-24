@@ -15,8 +15,9 @@ namespace FooApi
                 .ReadFrom.Configuration(Configuration)
                 .WriteTo.DurableHttpUsingFileSizeRolledBuffers(
                       requestUri: Configuration.GetValue<string>("AppSettings:logstashurl"),
+                      batchFormatter: new Serilog.Sinks.Http.BatchFormatters.ArrayBatchFormatter(),
                       bufferBaseFileName: Configuration.GetValue<string>("AppSettings:logstashBufferBaseFileName"),
-                      batchFormatter: new Serilog.Sinks.Http.BatchFormatters.ArrayBatchFormatter())
+                      batchPostingLimit: 10000)
                 .WriteTo.Console()
                 .EnrichMe()
                 .CreateLogger();

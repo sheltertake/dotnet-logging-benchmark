@@ -75,15 +75,15 @@ docker-compose -f fooapi-logstash\docker-compose.yml down
 Running 20s test @ http://api/weatherforecast
   12 threads and 400 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency   103.16ms   66.04ms 797.00ms   87.28%
-    Req/Sec   351.79    150.97   747.00     67.18%
+    Latency    82.79ms   57.47ms 902.07ms   91.72%
+    Req/Sec   416.39    160.58     1.08k    68.49%
   Latency Distribution
-     50%   82.66ms
-     75%  114.11ms
-     90%  171.96ms
-     99%  375.55ms
-  77539 requests in 20.09s, 48.90MB read
-Requests/sec:   3859.06
-Transfer/sec:      2.43MB
+     50%   71.10ms
+     75%   90.46ms
+     90%  123.12ms
+     99%  240.96ms
+  93733 requests in 20.07s, 59.11MB read
+Requests/sec:   4670.94
+Transfer/sec:      2.95MB
 
 ```
