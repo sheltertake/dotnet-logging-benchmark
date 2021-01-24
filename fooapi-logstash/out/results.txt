@@ -1,0 +1,13 @@
+Running 20s test @ http://api/weatherforecast
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    99.07ms  114.43ms   1.63s    94.30%
+    Req/Sec   410.40    166.40     0.88k    69.57%
+  Latency Distribution
+     50%   71.98ms
+     75%   93.17ms
+     90%  146.86ms
+     99%  627.19ms
+  90211 requests in 20.10s, 56.89MB read
+Requests/sec:   4487.33
+Transfer/sec:      2.83MB
