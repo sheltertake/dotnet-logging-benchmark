@@ -13,13 +13,6 @@ namespace FooApi
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
-                .WriteTo.DurableHttpUsingFileSizeRolledBuffers(
-                      requestUri: Configuration.GetValue<string>("AppSettings:logstashurl"),
-                      batchFormatter: new Serilog.Sinks.Http.BatchFormatters.ArrayBatchFormatter(),
-                      bufferBaseFileName: Configuration.GetValue<string>("AppSettings:logstashBufferBaseFileName"),
-                      batchPostingLimit: 10000)
-                .WriteTo.Console()
-                .EnrichMe()
                 .CreateLogger();
             try
             {
@@ -49,16 +42,5 @@ namespace FooApi
                     webBuilder.UseStartup<Startup>();
                 });
 
-        public static LoggerConfiguration EnrichMe(this LoggerConfiguration logger) => logger
-            .Enrich.FromLogContext()
-            .Enrich.WithMachineName()
-            .Enrich.WithEnvironmentUserName()
-            .Enrich.WithAssemblyName()
-            .Enrich.WithAssemblyVersion()
-            .Enrich.WithProcessId()
-            .Enrich.WithProcessName()
-            .Enrich.WithThreadId()
-            .Enrich.WithThreadName()
-            .Enrich.WithMemoryUsage();
     }
 }
