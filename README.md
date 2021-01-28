@@ -1,11 +1,26 @@
 # dotnet-logging-benchmark
 
-## Console
+ - No logging : Requests/sec:  29333.89
+ - Console : Requests/sec:  16825.91
+ - Serilog (console) : Requests/sec:   8361.59
+ - Serilog (console + http) : Requests/sec:   2972.59
 
 
+## TODO
+ 
+ - refine benchmarks (warmup + at least 3 repetitions)
+ - try DurableHttpUsingFileSizeRolledBuffers
+ - benchmark Serilog without enrichers
+ - try filebeat?
 
+## No logging provider
+
+
+```cmd
 docker-compose -f fooapi-nologging\docker-compose.yml up --build -d 
 docker-compose -f fooapi-nologging\docker-compose.yml down
+```
+
 
 ```text
 Running 20s test @ http://api/weatherforecast
@@ -22,11 +37,13 @@ Running 20s test @ http://api/weatherforecast
 Requests/sec:  29333.89
 Transfer/sec:     18.50MB
 
-
 ```
+## Console
 
+```cmd
 docker-compose -f fooapi-console\docker-compose.yml up --build -d 
 docker-compose -f fooapi-console\docker-compose.yml down
+```
 
 ```text
 Running 20s test @ http://api/weatherforecast
@@ -46,9 +63,13 @@ Transfer/sec:     10.61MB
 
 ```
 
+## Serilog: Console
 
+```cmd
 docker-compose -f fooapi-serilog\docker-compose.yml up --build -d 
 docker-compose -f fooapi-serilog\docker-compose.yml down
+```
+
 
 ```text
 Running 20s test @ http://api/weatherforecast
@@ -66,10 +87,16 @@ Requests/sec:   8361.59
 Transfer/sec:      5.27MB
 
 ```
+
+## Serilog: Console + Http -> Elk
+
+```cmd
+
 docker-compose -f .\fooapi-logstash\docker-compose-elk.yml up
 
 docker-compose -f fooapi-logstash\docker-compose.yml up --build -d 
 docker-compose -f fooapi-logstash\docker-compose.yml down
+```
 
 ```text
 Running 20s test @ http://api/weatherforecast
