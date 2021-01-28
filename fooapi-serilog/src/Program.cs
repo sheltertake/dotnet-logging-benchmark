@@ -13,7 +13,6 @@ namespace FooApi
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
-                .EnrichMe()
                 .CreateLogger();
             try
             {
@@ -43,16 +42,5 @@ namespace FooApi
                     webBuilder.UseStartup<Startup>();
                 });
 
-        public static LoggerConfiguration EnrichMe(this LoggerConfiguration logger) => logger
-            .Enrich.FromLogContext()
-            .Enrich.WithMachineName()
-            .Enrich.WithEnvironmentUserName()
-            .Enrich.WithAssemblyName()
-            .Enrich.WithAssemblyVersion()
-            .Enrich.WithProcessId()
-            .Enrich.WithProcessName()
-            .Enrich.WithThreadId()
-            .Enrich.WithThreadName()
-            .Enrich.WithMemoryUsage();
     }
 }
